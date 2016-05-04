@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   opts.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/22 14:04:30 by fjacquem          #+#    #+#             */
-/*   Updated: 2016/05/04 15:45:06 by fjacquem         ###   ########.fr       */
+/*   Created: 2016/03/24 20:03:52 by fjacquem          #+#    #+#             */
+/*   Updated: 2016/03/24 20:03:54 by fjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# ifndef BUFF_SIZE
-#  define BUFF_SIZE 1024
-# endif
-# ifndef DELIM
-#  define DELIM '\n'
-# endif
-# ifndef BIN_MODE
-#  define BIN_MODE 1
-# endif
-# include <fcntl.h>
-# include "libft.h"
+#include <explorer.h>
 
-typedef struct	s_gnl
+void	first_of_all(t_args *arg, int n)
 {
-	int			fd;
-	char		*buffer;
-}				t_gnl;
-
-int				get_next_line(const int fd, char **line);
-
-#endif
+	arg->typemap = NULL;
+	arg->colormap = NULL;
+	arg->ret = 0;
+	arg->path = malloc(sizeof(char*) * (n));
+	ft_memset(arg->path, 0, sizeof(char*) * (n));
+	ft_memset(arg->offset, 0, sizeof(int) * 6);
+}

@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/22 14:04:30 by fjacquem          #+#    #+#             */
-/*   Updated: 2016/05/04 15:45:06 by fjacquem         ###   ########.fr       */
+/*   Created: 2016/03/23 02:00:08 by fjacquem          #+#    #+#             */
+/*   Updated: 2016/03/23 02:00:10 by fjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# ifndef BUFF_SIZE
-#  define BUFF_SIZE 1024
-# endif
-# ifndef DELIM
-#  define DELIM '\n'
-# endif
-# ifndef BIN_MODE
-#  define BIN_MODE 1
-# endif
-# include <fcntl.h>
-# include "libft.h"
+#include <explorer.h>
 
-typedef struct	s_gnl
+int				explorer(t_term *t, char **args)
 {
-	int			fd;
-	char		*buffer;
-}				t_gnl;
+	t_args	tmp;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	(void)args;
+	tmp.mask = LIST | MTIME | COLOR;
+	tmp.path = t->dirpath;
+	tmp.colormap = NULL;
+	tmp.typemap = NULL;
+	tmp.ret = 0;
+	if (!tmp.colormap)
+		found_clicolor(&tmp, t->env);
+	if (tmp.mask & COLOR)
+		tmp.typemap = init_typemap(t->env);
+	ls(t, &tmp);
+	return (0);//stop_ls(&tmp));
+}

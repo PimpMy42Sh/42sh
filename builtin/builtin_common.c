@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   builtin_commom.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/22 14:04:30 by fjacquem          #+#    #+#             */
-/*   Updated: 2016/05/04 15:45:06 by fjacquem         ###   ########.fr       */
+/*   Created: 2016/04/14 22:50:05 by fjacquem          #+#    #+#             */
+/*   Updated: 2016/04/14 22:50:16 by fjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# ifndef BUFF_SIZE
-#  define BUFF_SIZE 1024
-# endif
-# ifndef DELIM
-#  define DELIM '\n'
-# endif
-# ifndef BIN_MODE
-#  define BIN_MODE 1
-# endif
-# include <fcntl.h>
-# include "libft.h"
+#include <builtin.h>
 
-typedef struct	s_gnl
+int		setenv_error(t_term *t, int index, char **args)
 {
-	int			fd;
-	char		*buffer;
-}				t_gnl;
-
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (!args[index])
+	{
+		print_error(t, "setenv", "domain needed");
+		return (1);
+	}
+	else if (!args[index + 1])
+	{
+		print_error(t, "setenv", "value needed");
+		return (1);
+	}
+	else if (args[index + 2])
+	{
+		print_error(t, "setenv", "bad arguments");
+		return (1);
+	}
+	return (0);
+}
